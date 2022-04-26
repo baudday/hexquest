@@ -1,0 +1,209 @@
+<h2>Welcome Adventurer!</h2>
+<p>
+    This quest, above all else, will require you to believe in yourself and
+    trust in your ability to accomplish new and difficult things. On your journey, you will be
+    combining your knowledge of geometry with your skills as a programmer 😱. Some might find this
+    exercise exceedingly simple and intuitive (let me know if you do I want to learn from you), while
+    others will struggle all along the way.
+</p>
+<p>
+    Some parts might make sense immediately while others will require you to sit with the problem
+    for a while and take in the same information multiple times over until your brain is able to
+    connect the pieces. You will, in all likelihood, have to step away from the computer and allow
+    your brain to do some processing without your direct supervision. Some parts might just not
+    click for you at all. That is all not only okay, but expected. The point is not to solve the
+    poblem first, but instead to pay attention and marvel at all that you are capable of when
+    you give yourself some room to fail and learn. Whatever you do, don't despair because you are not
+    alone! Remember that everything is within your abilities as long as you don't give up and
+    instead make the decision to come back one more time to see if anything about your understanding
+    has changed.
+</p>
+<blockquote>
+    It always seems impossible until it is done.
+    <figcaption>&mdash; Nelson Rolihlahla Mandela</figcaption>
+</blockquote>
+<p>
+    With all of that in mind, let's get going! If you need a hand at any point, feel free to message
+    Willem on Slack and he will be more than happy to assist.
+</p>
+
+<h2>Okay... So what?</h2>
+<p>
+    So what are we doing exactly? Well, simply, we're going to draw hexagons. Let's just leave it at
+    that for now because that already might sound kind of intimidating. Now, if we're going to remain
+    motivated throughout our journey, we are going to want to get hyped up on hexagons... Go ahead
+    and watch this piece of hexagon propaganda from someone who is entirely too excited about hexagons.
+</p>
+
+<div class="video-container">
+    <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/thOifuHs6eY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+<h2>Let's get Specifical</h2>
+<p>
+    Okay nice. So "hexagons are the bestagons" or whatever. Now let's draw one on a canvas! That
+    still sounds pretty huge to be honest. I mean that video didn't really cover anything specific.
+    I just kind of thought it would set the mood nicely for us. Let's get a little more specific.
+    Have a look at <a href="https://www.redblobgames.com/grids/hexagons/" target="blank">this
+        amazing piece of documentation</a> on hexagons in code. When you do, be sure to mess
+    around with all the interactive features. You can flip from pointy top to flat top in certain
+    places and the diagrams, math, code, will all change accordingly. For our purposes we're going
+    to do flat top, but if you're feeling decidedly pointy topped, be my guest! Read as far ahead as
+    you'd like, but be sure to at least make it through the
+    <a href="https://www.redblobgames.com/grids/hexagons/#basics" target="blank">Geometry</a>
+    section before returning back here.
+</p>
+
+<p>...</p>
+<p>
+    You're back! Let's go over some key takeaways.
+    <ol>
+        <li>
+            A hexagon consists of six wedges, each an equilateral triangle with angle (<code>alpha</code>)
+            equal to 60º or 2π / 6 radians.
+        </li>
+        <li>Each corner (or vertex) is <code>size</code> units away from the <code>center</code>.</li>
+    </ol>
+
+    Essentially, what we're dealing with is a circle which is split evenly into 6 slices and instead
+    of getting all complicated trying to figure out the arc from vertex to vertex, we're just going
+    to go straight from one to the next. Six even sides.
+</p>
+
+<h2>The Theory</h2>
+<p>
+    Now that we have an idea of what a hexagon is in simple terms, let's think about an approach we
+    could take to draw one in a procedural way. The HTML5 Canvas allows us to build a path from
+    start to finish and then apply a stroke to it afterward. So we just need to figure out how to
+    move to each vertex. Then we can apply the <code>stroke()</code> and we will have drawn a hexagon!
+</p>
+<h2>Practice</h2>
+<p>
+    I'm instantiating a Canvas below. Modify the <code>draw(x, y)</code> method in
+    <code>/public/javascripts/hex.js</code> of this repo and try to figure out how to path your way
+    around a single hexagon. If you started the app with <code>npm start</code> then you can just
+    save and refresh this page to see your changes. I know that personally, I have to work in order
+    to remember the SOH, CAH, TOA of it all, so if you're like me and you find that you need a
+    little additional <i>assistance</i>, then check out
+    <a href="https://eperezcosano.github.io/hex-grid/#a-hexagon">this</a>
+    guide. Try to implement your algorithm with as little information as you need from there though,
+    because it does contain the actual answer too. No shame in using your resources though! I would
+    suggest ignoring the grid portion there as it is more convoluted than necessary.
+</p>
+
+<div class="center">
+    <canvas width="250" height="250" id="single"></canvas>
+</div>
+
+<script type="module">
+    import Hex from '/javascripts/hex.js'
+
+    const singleCanvas = document.getElementById('single')
+    const singleSize = 125
+    const singleHex = Hex(singleCanvas, singleSize)
+
+    singleHex.draw(singleSize, singleSize)
+</script>
+
+<p>...</p>
+
+<h2>Uhhh-MAZINGH! 👏👏</h2>
+<p>
+    If the canvas above has a big ol' hexagon in it, then you already have much to be proud of!
+    Hopefully,  what you did in <code>draw(x, y)</code> makes sense to you conceptually. If not,
+    just let it marinate and your brain will work behind the scenes to piece some things together.
+    If this is as far as you get on this assignment, then I'm sure we already have lots to discuss.
+    Take a break and think about the wondrous nature of the Hexagon, and when you're ready come back
+    here and move on to the next section.
+</p>
+
+<hr>
+
+<h2>Let's make a Grid!</h2>
+<p>
+    Drawing one hexagon is neat of course, but the super satisfying thing about hexagons (as you saw
+    in the video above) is how they grid together! This is ultimately why we're here. Because, as
+    you are about to learn (may already know), it's just a smidge more complicated than a square
+    grid. Luckily though, you already know how to draw a single hexagon centered at point <code>(x, y)</code>.
+    This is going to be hugely handy for gridding. Why? Because now, all you have to do is draw
+    <code>q</code> many columns of <code>r</code> many hexagons each. All that's left to figure out
+    is how to generally calculate the specific locations of each hexagon based on its individual
+    <code>(q, r)</code> axial coordinates! So let's get into it. Once again, I'll have you refer to
+    <i>The Documentation™</i>.
+</p>
+
+<p>
+    This time, we're going to look at the
+        <a href="https://www.redblobgames.com/grids/hexagons/#coordinates" target="blank">
+            Coordinate Systems
+        </a> section specifically. This part is cool, so I would suggest spending some time here,
+    especially playing around with the interactive features. Since we're a flat top group, we're
+    specifically interested in either the <code>odd-q</code> or <code>even-q</code> variants. For
+    expediency's sake (decision fatigue), let's arbitrarily choose to implement <code>odd-q</code>.
+    Come back here when you're ready.
+</p>
+
+<p>...</p>
+
+<p>
+    We back! Alright, so what do we take away this time?
+    <ol>
+        <li>In general terms, a grid is just columns (<code>q</code>) and rows (<code>r</code>).</li>
+        <li>Hexagons are shaped in a way that demands every other (column in our case) of the grid
+            be offset by some amount.</li>
+        <li>If we're going the <code>odd-q</code> direction, then that means every odd-indexed column
+            is shifted down on the grid.</li>
+    </ol>
+</p>
+
+<h2>Practice</h2>
+<p>
+    Alright I'm instantiating another Canvas below! This time, modify the <code>grid(width, height)</code>
+    method in <code>/public/javascripts/hex.js</code> to call your <code>draw(x, y)</code> method
+    and draw a hex in every location necessary to create a grid that is <code>width</code> hexagons
+    wide and <code>height</code> hexagons tall. Being sure to select the <code>flat-top</code> variation,
+    you can implement <a href="https://www.redblobgames.com/grids/hexagons/#hex-to-pixel-axial" target="blank">this
+    algorithm</a> (called <code>axialToPixel()</code> in <code>hex.js</code>) to convert a hexagonal
+    coordinate to a pixel (<code>x, y</code>) coordinate.
+</p>
+
+<p><em>
+    Note: You may run into a problem with each successive column getting lower by 1 hexagon and
+    this may require you to conditionally offset <code>r</code> by some amount. Think it through a
+    little if you can!
+</em></p>
+
+<div class="center">
+    <canvas width="250" height="250" id="grid"></canvas>
+</div>
+
+<script type="module">
+    import Hex from '/javascripts/hex.js'
+
+    const gridCanvas = document.getElementById('grid')
+    const gridSize = 14
+    const gridHex = Hex(gridCanvas, gridSize)
+    const gridWidth = 11
+    const gridHeight = 10
+
+    gridHex.grid(gridWidth, gridHeight)
+</script>
+
+<p>...</p>
+
+<h2>👏 🏁 🏁 🏁 🏁 🏁 🏁 👏</h2>
+<p>
+    You made it! That is officially the end of this adventure. I hope you learned something about
+    hexagons, code, yourself? If you have some time to show off a little, it would be super impressive
+    if you read up on the <a href="" target="blank">Pixel to Hex section</a> of <i>The Documentation™</i>
+    and implemented a mouseover event listener on the canvas that highlights the hexagon you are
+    currently over. If you want it to be smooth, you'll need to use the
+    <a href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame" target="blank">
+        <code>requestAnimationFrame()</code></a> method.
+</p>
+
+<p>
+    I hope you enjoyed this exercise and that it was challenging enough without being cumbersome.
+    If you have any feedback, we can talk at the Engineering Rally, or you can slack Willem individually.
+    Bye for now! 👋
+</p>
